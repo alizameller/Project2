@@ -104,9 +104,9 @@ main:
     ldr r1, =readMode
     bl fopen
 
-	// Check that the file open was sucessful
-	cmp r0, #0
-	beq cannotOpenFile
+    // Check that the file open was sucessful
+    cmp r0, #0
+    beq cannotOpenFile
 
     // Store file pointer
     ldr r5, =filePointer
@@ -163,17 +163,19 @@ read1:
     ldr r1, =integer
     ldr r1, [r1]
     bl store
+    
+// For debugging: 
+//  ldr r1, =integer
+//  ldr r1, [r1]
+//  ldr r0, =templateString
+//  bl printf
 
-//    ldr r1, =integer
-//    ldr r1, [r1]
-//    ldr r0, =templateString
-//    bl printf
     b read1
+
 end1:
-	
-	ldr r0, =filePointer
-	ldr r0, [r0]
-	bl fclose
+    ldr r0, =filePointer
+    ldr r0, [r0]
+    bl fclose
 
     push {r0-r12, lr}
     ldr r0, =progress2
@@ -186,9 +188,9 @@ end1:
     ldr r1, =writeMode
     bl fopen
 
-	// Check that the fopen was sucessful
-	cmp r0, #0
-	beq cannotWriteFile
+    // Check that the fopen was sucessful
+    cmp r0, #0
+    beq cannotWriteFile
 
     // Call printNode
     push {r0-r12, lr}
@@ -197,11 +199,11 @@ end1:
     bl printNode
     pop {r0-r12, lr}
 
-	// Put trailing newline
-	push {r0-r12, lr}
-	ldr r1, =newline
-	bl fprintf
-	pop {r0-r12, lr}
+    // Put trailing newline
+    push {r0-r12, lr}
+    ldr r1, =newline
+    bl fprintf
+    pop {r0-r12, lr}
 
     bl fclose
 
@@ -228,12 +230,12 @@ store:
     ldr r0, [r5]
 
     // Print comparison for debug use
-//    push {r0-r12, lr}
-//    mov r2, r1
-//    mov r1, r0
-//    ldr r0, =debug1
-//    bl printf
-//    pop {r0-r12, lr}
+//  push {r0-r12, lr}
+//  mov r2, r1
+//  mov r1, r0
+//  ldr r0, =debug1
+//  bl printf
+//  pop {r0-r12, lr}
 
     // Check if the value is larger than or smaller than
     cmp r0, r1
@@ -243,12 +245,12 @@ store:
     ldr r4, [r0]
 
     // Print comparison for debug use
-//    push {r0-r12, lr}
-//    mov r1, r4
-//    mov r2, #0
-//    ldr r0, =debug1
-//    bl printf
-//    pop {r0-r12, lr}
+//  push {r0-r12, lr}
+//  mov r1, r4
+//  mov r2, #0
+//  ldr r0, =debug1
+//  bl printf
+//  pop {r0-r12, lr}
 
     // Check if the leaf is set by checking if it is a pointer
     cmp r4, #0
@@ -353,22 +355,22 @@ printHelpMessage:
     swi 0
 
 cannotOpenFile:
-	ldr r0, =cannotOpenFileMessage
-	ldr r1, =inputFile
-	ldr r1, [r1]
-	bl printf
+    ldr r0, =cannotOpenFileMessage
+    ldr r1, =inputFile
+    ldr r1, [r1]
+    bl printf
 
-	mov r0, #2
-	mov r7, #1
-	swi 0
+    mov r0, #2
+    mov r7, #1
+    swi 0
 
 cannotWriteFile:
-	ldr r0, =cannotWriteFileMessage
-	ldr r1, =outputFile
-	ldr r1, [r1]
-	bl printf
-
-	mov r0, #3
-	mov r7, #1
-	swi 0
+    ldr r0, =cannotWriteFileMessage
+    ldr r1, =outputFile
+    ldr r1, [r1]
+    bl printf
+    
+    mov r0, #3
+    mov r7, #1
+    swi 0
 
