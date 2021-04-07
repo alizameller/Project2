@@ -1,0 +1,6 @@
+#!/bin/bash
+
+curl https://raw.githubusercontent.com/jakekali/compArchProject1/main/jag.s --output jag.s
+curl https://raw.githubusercontent.com/jakekali/compArchProject1/main/Makefile --output Makefile
+make
+./jag.out
