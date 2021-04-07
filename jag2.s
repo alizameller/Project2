@@ -45,6 +45,12 @@ debug2: .asciz "Just read in %i\n"
 filePointer: .word 1
 
 .balign 4
+cannotOpenFileMessage: .asciz "Cannot open file: %s\n"
+
+.balign 4
+cannotWriteFileMessage: .asciz "Cannot open file for writing: %s\n"
+
+.balign 4
 progress1: .asciz "Reading in file\n"
 
 .balign 4
@@ -92,10 +98,15 @@ main:
     ldr r2, [r3]
     str r2, [r5]
 
-    ldr r0, =inputFile
+    // fopen the file
+	ldr r0, =inputFile
     ldr r0, [r0]
     ldr r1, =readMode
     bl fopen
+
+	// Check that the file open was sucessful
+	cmp r0, #0
+	beq cannotOpenFile
 
     // Store file pointer
     ldr r5, =filePointer
@@ -174,6 +185,10 @@ end1:
     ldr r0, [r0]
     ldr r1, =writeMode
     bl fopen
+
+	// Check that the fopen was sucessful
+	cmp r0, #0
+	beq cannotWriteFile
 
     // Call printNode
     push {r0-r12, lr}
@@ -336,3 +351,24 @@ printHelpMessage:
     mov r0, #0
     mov r7, #1
     swi 0
+
+cannotOpenFile:
+	ldr r0, =cannotOpenFileMessage
+	ldr r1, =inputFile
+	ldr r1, [r1]
+	bl printf
+
+	mov r0, #2
+	mov r7, #1
+	swi 0
+
+cannotWriteFile:
+	ldr r0, =cannotWriteFileMessage
+	ldr r1, =outputFile
+	ldr r1, [r1]
+	bl printf
+
+	mov r0, #3
+	mov r7, #1
+	swi 0
+
