@@ -5,6 +5,7 @@
 
 ## Help
 Usage: Sort linefeed delimited numbers in a file in ascending order then output to a file
+
 Example: 
 - input.txt output.txt 
 It is also possible to replace the file with the sorted version: 
