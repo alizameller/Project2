@@ -1,6 +1,0 @@
-#!/bin/bash
-
-curl https://raw.githubusercontent.com/alizameller/Project2/main/jag2.s --output jag2.s
-curl https://raw.githubusercontent.com/alizameller/Project2/main/Makefile --output Makefile
-make
-./jag.out
