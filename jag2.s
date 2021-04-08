@@ -98,7 +98,7 @@ main:
     str r2, [r5]
 
     // fopen the file
-	ldr r0, =inputFile
+    ldr r0, =inputFile
     ldr r0, [r0]
     ldr r1, =readMode
     bl fopen
