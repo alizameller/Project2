@@ -78,7 +78,6 @@ main:
     cmp r0, #3 // Expected number of arguments
     // If the number of expected arugments is not entered, print help message then exit
     ldr r5, =programName
-    mov r6, sp
     ldr r3, [sp, #8] // argv[0]
     ldr r2, [r3]
     str r2, [r5]
@@ -123,7 +122,6 @@ main:
     bl fscanf
 
     // create treeRoot
-    mov r6, r1
     mov r0, #24
     bl malloc
     ldr r8, =treeRoot
@@ -131,12 +129,11 @@ main:
     ldr r6, =integer
     ldr r6, [r6]
     str r6, [r0]
-    add r0, r0, #8
-    mov r7, #0
+    add r0, r0, #8 
+    mov r7, #0  
     str r7, [r0]
     add r0, r0, #8
     str r7, [r0]
-    mov r0, r5
 
 read1:
     // load filePointer
@@ -151,15 +148,8 @@ read1:
     cmp r0, #1
     bne end1
 
-    push {r0-r12, lr}
-    ldr r0, =templateString
-    ldr r1, =integer
-    ldr r1, [r1]
-    pop {r0-r12, lr}
-
     // Add value to tree
     ldr r0, =treeRoot
-
     ldr r1, =integer
     ldr r1, [r1]
     bl store
@@ -194,7 +184,7 @@ end1:
 
     // Call printNode
     push {r0-r12, lr}
-    mov r1, r0
+    mov r1, r0		//r0 contains file pointer at this point
     ldr r0, =treeRoot
     bl printNode
     pop {r0-r12, lr}
@@ -220,7 +210,7 @@ end1:
     swi 0
 
 // store function
-// r0: pointer to start of node
+// r0: pointer to root node
 // r1: integer
 store:
     // Store original r0 pointer location
