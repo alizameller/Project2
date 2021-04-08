@@ -334,7 +334,7 @@ printHelpMessage:
 
     ldr r1, =programName
     ldr r1, [r1]
-	mov r2, r1
+    mov r2, r1
     ldr r0, =helpMessage
     bl printf
 
