@@ -9,7 +9,7 @@ outputFile: .word 1
 programName: .word 1
 
 .balign 4
-helpMessage: .asciz "Usage: %s INPUT_FILE OUTPUT_FILE\nSort linefeed delimited numbers in a file in ascending order then output to a file\nExample: %s input.txt output.txt\n\nIt is also possible to replace the file with the sorted version: %s numbers.txt numbers.txt"
+helpMessage: .asciz "Usage: %s INPUT_FILE OUTPUT_FILE\nSort linefeed delimited numbers in a file in ascending order then output to a file\nExample: %s input.txt output.txt\n\nIt is also possible to replace the file with the sorted version: %s numbers.txt numbers.txt\n"
 
 .balign 4
 readMode: .asciz "r"
@@ -335,6 +335,7 @@ printHelpMessage:
     ldr r1, =programName
     ldr r1, [r1]
     mov r2, r1
+    mov r3, r1
     ldr r0, =helpMessage
     bl printf
 
