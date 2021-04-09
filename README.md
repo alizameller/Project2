@@ -70,4 +70,4 @@ Running `jag2.out` will then output this into the output file:
 ```
 
 ## Design Document
-The Design Document can be found [here](../main/Design%20Document%20-%20Project%20%231.pdf) 
+The Design Document can be found [here](https://github.com/alizameller/Project2/blob/main/Design%20Document%20-%20Project%20%232.pdf) 
